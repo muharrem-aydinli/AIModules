@@ -11,4 +11,4 @@ This repo includes:
 
 -Docker swarm (frontend, backend and database)
 
-AIModules is licensed under GPLv2 and available under https://aimodules.de
+AIModules is licensed under GPLv2 and available under https://aimodules.heinzelab.de or https://bioinfo-wuerz.de/aimodules
