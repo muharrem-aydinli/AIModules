@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
+
+<!-- 
+Level 	ANSI color
+FATAL 	Bright red
+ERROR 	Bright red
+WARN 	Yellow
+INFO 	Green
+DEBUG 	Cyan
+TRACE 	Black (looks dark grey)
+
+The color names are ANSI names defined in the AnsiEscape class. 
+ -->
+ 
+    <Appenders>
+        <!-- <RandomAccessFile name="FILE" fileName="${env:HOME}/tmp/logfile.log" append="true"> -->
+        <!-- <RandomAccessFile name="FILE" fileName="/tmp/logfile.log" append="true"> -->
+            <!-- <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n"/> -->
+            <!-- <PatternLayout pattern="%highlight{%-5p | %d{yyyy-MMM-dd HH:mm:ss,SSS} | [%threadName] [%threadId] %class{2} (%location) - %enc{%m}%n}"/>
+        </RandomAccessFile> -->
+        <RollingFile name="RollingFILE" fileName="/tmp/totalLog.log"
+            filePattern="/tmp/totalLog-%d{MM-dd-yyyy}-%i.log">
+            <PatternLayout>
+                <Pattern>%d %p %c [%t] %m%n</Pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="1 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="2000"/>
+        </RollingFile>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%highlight{%-5p | %d{yyyy-MMM-dd HH:mm:ss,SSS} | [%threadName] [%threadId] %class{2} (%location) - %enc{%m}%n}"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+		
+        <Logger name="org.moi" level="error"/>
+
+        <Root level="info">
+        	<AppenderRef ref="RollingFILE"/>
+            <AppenderRef ref="STDOUT"/>
+            <!-- <AppenderRef ref="FILE"/> -->
+        </Root>
+    </Loggers>
+
+</Configuration>

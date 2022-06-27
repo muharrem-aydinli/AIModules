@@ -1,0 +1,7 @@
+docker build -t scorepwm_backend .  # Create image using this directory's Dockerfile
+
+docker run -v /tmp:/tmp -v /tmp/tomcat-logs/:/usr/share/tomcat8/logs/ -v /tmp/tomcat-conf/:/usr/share/tomcat8/conf/ -d -p 8080:8080 scorepwm_backend # map host /tmp to docker /tmp: dont write to docker /tmp, but to host /tmp!, mapping #port 8080 to 8080 in detached mode
+
+ docker exec -i -t "name-of-container" /bin/bash -> connect to a running container
+# docker exec -i -t "id-of-container" /bin/bash -> connect to a running container
+

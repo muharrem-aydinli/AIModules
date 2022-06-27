@@ -1,0 +1,1 @@
+./tessWms -seq seq.txt -mat matrix.txt -out my_results.txt -fmt t -mlo 1.0

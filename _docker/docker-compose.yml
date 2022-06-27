@@ -1,0 +1,110 @@
+version: "3.2"
+services:
+  webfrontend:
+    image: scorepwm_frontend:latest
+    depends_on:
+      - backend
+      - postgres-db
+    #build:
+      #context: ./container/frontend
+      #dockerfile: Dockerfile
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "1"
+          memory: 500M
+    ports:
+      - "80:80"
+    networks:
+      - webnet
+      
+  backend:
+    image: scorepwm_backend:latest
+    depends_on:
+      - postgres-db
+    #build:
+      #context: ./container/backend
+      #dockerfile: Dockerfile
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "1"
+          memory: 500M
+    ports:
+      - "8080:8080"
+    volumes:
+      - /tmp:/tmp
+    networks:
+      - webnet
+ 
+  postgres-db:
+    image: eg_postgresql:latest
+    #build:
+      #context: ./container/postgres-db
+      #dockerfile: Dockerfile
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 2
+        delay: 10s
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+      resources:
+        limits:
+          cpus: "1"
+          memory: 500M
+    ports:
+      - "5432:5432"
+    volumes:
+      - type: volume
+        source: tmp_conf
+        target: /etc/postgresql/9.3/main/
+        volume:
+          nocopy: false
+      - type: volume
+        source: tmp_logs
+        target: /var/log/postgresql
+        volume:
+          nocopy: false
+      - type: volume
+        source: tmp_db
+        target: /var/lib/postgresql/9.3/main
+        volume:
+          nocopy: false
+    networks:
+      - webnet
+           
+  #visualizer:
+    #image: dockersamples/visualizer:stable
+    #ports:
+      #- "8081:8080"
+    #volumes:
+      #- "/var/run/docker.sock:/var/run/docker.sock"
+    #deploy:
+      #placement:
+        #constraints: [node.role == manager]
+    #networks:
+      #- webnet
+
+volumes:
+  tmp_conf: #/tmp/postgres/conf
+  tmp_logs: #/tmp/postgres/logs
+  tmp_db: #/tmp/postgres/db
+  
+networks:
+  webnet:

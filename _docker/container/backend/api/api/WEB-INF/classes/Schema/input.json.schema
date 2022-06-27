@@ -1,0 +1,183 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "title": "Root schema.",
+  "description": "This schema is to validate json to the rest service.",
+  "properties": {
+    "JSON_String": {
+      "type": "array",
+      "uniqueItems": true,
+      "minItems": 6,
+      "maxItems": 9,
+      "title": "JSON_String schema.",
+      "description": "Start of data objects.",
+      "items": [
+      	{
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "title": "0 schema.",
+          "description": "Is individual dna sequence or from jaspar db.",
+          "properties": {
+            "WhatSequence": {
+              "type": "integer",
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "WhatSequence schema.",
+              "description": "Selected dna sequence type.",
+              "properties": {}
+            }
+          }
+        },
+        {
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "title": "1 schema.",
+          "description": "What species to use for dna sequence selection from db.",
+          "properties": {
+            "SpeciesSequence": {
+              "type": "string",
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "dna of species schema.",
+              "description": "Selected species.",
+              "properties": {}
+            }
+          }
+        },
+      	{
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "title": "0 schema.",
+          "description": "Is individual matrix or from jaspar db.",
+          "properties": {
+            "WhatMatrix": {
+              "type": "integer",
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "WhatMatrix schema.",
+              "description": "Selected matrix type.",
+              "properties": {}
+            }
+          }
+        },
+        {
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "title": "1 schema.",
+          "description": "What animal class to use for matrix selection from db.",
+          "properties": {
+            "AnimalClassMatrix": {
+              "type": "string",
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "AnimalClassMatrix schema.",
+              "description": "Selected animal class.",
+              "properties": {}
+            }
+          }
+        },
+        {
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "title": "2 schema.",
+          "description": "Start of DNA data.",
+          "properties": {
+            "FASTA": {
+              "type": ["object", "null"],
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "FASTA schema.",
+              "description": "FASTA DNA data.",
+              "properties": {}
+            }
+          }
+        },
+        {
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 1,
+          "title": "3 schema.",
+          "description": "Start of Matrix data.",
+          "properties": {
+            "Matrix": {
+              "type": ["object", "null"],
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "Matrix schema.",
+              "description": "Matrix data.",
+              "properties": {}
+            }
+          }
+        },
+        {
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "title": "MinThreshold.",
+          "description": "Only show scores bigger than this value.",
+          "properties": {
+            "WhatSequence": {
+              "type": "integer",
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "MinThreshold.",
+              "description": "Only show scores bigger than this value.",
+              "properties": {}
+            }
+          }
+        },
+        {
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "title": "MaxDeficit.",
+          "description": "Only show scores which match: (maxscore - score) smaller than this value.",
+          "properties": {
+            "WhatSequence": {
+              "type": "integer",
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "MaxDeficit.",
+              "description": "Only show scores which match: (maxscore - score) smaller than this value.",
+              "properties": {}
+            }
+          }
+        },
+        {
+          "type": "object",
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 1,
+          "title": "Should Module filter be activated.",
+          "description": "When activated common modules are searched.",
+          "properties": {
+            "WhatSequence": {
+              "type": "integer",
+              "uniqueItems": true,
+              "minItems": 1,
+              "title": "Should Module filter be activated.",
+              "description": "When activated common modules are searched.",
+              "properties": {}
+            }
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "JSON_String"
+  ]
+}
